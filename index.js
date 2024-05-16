@@ -11,6 +11,11 @@ const server= http.createServer(app);
 const io = new Server(server);
 //handle socket.io requests
 
+io.on("connection", (socket)=>{
+    socket.on("message", (message)=>{
+       io.emit("message", message);
+    })
+})
 
 
 
