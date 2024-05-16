@@ -1,8 +1,27 @@
 const http = require('http');
 const express = require('express');
+const {Server} = require('socket.io');
+
 
 const app = express();
-app.use(express.static('/public'));
+
+const path = require('path');
 const server= http.createServer(app);
+
+const io = new Server(server);
+//handle socket.io requests
+
+
+
+
+
+//handles https requests
+
+app.use(express.static(path.resolve("./public")));
+app.get('/', (req, res) => {
+    return res.sendFile("./public/index.html");
+});
+
+
 
 server.listen(3000, () => {console.log("server is running on port 3000")});
